@@ -24,6 +24,18 @@ test("Deve gerar as notas fiscais por regime de competencia", async function(){
     expect(output.at(0)?.amount).toBe(500); // 6000/ 12 meses = 500 reais
 });
 
+test("Deve gerar as notas fiscais por regime de competencia - mes 2", async function(){
+    const generateInvoices = new GenerateInvoices();
+    const input = {
+        month: 2,
+        year: 2022,
+        type: "accrual"
+    }
+    const output = await generateInvoices.execute(input);
+    expect(output.at(0)?.date).toBe("2022-02-01"); // em 1/2 = 500 reais
+    expect(output.at(0)?.amount).toBe(500); // 6000/ 12 meses = 500 reais
+});
+
 
 
 
