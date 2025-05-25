@@ -2,7 +2,7 @@ import Payment from "./Payment";
 
 export default class Contract {
 
-    payments: Payment[];
+    private payments: Payment[];
 
     constructor(
         readonly idContract: string, 
@@ -12,5 +12,13 @@ export default class Contract {
         readonly date: Date
     ) {
         this.payments = [];
+    }
+
+    addPayment(payment: Payment)  {
+        this.payments.push(payment);
+    }
+
+    getPayments()  {
+        return this.payments;
     }
 }

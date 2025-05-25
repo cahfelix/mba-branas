@@ -34,7 +34,7 @@ export default class ContractDatabaseRepository implements ContractRepository {
                     [contract.idContract]
             );
             for (const paymentData of paymentsData) {
-                contract.payments.push(new Payment(
+                contract.addPayment(new Payment(
                     paymentData.id_payment, 
                     parseFloat(paymentData.amount), 
                     paymentData.periods, 

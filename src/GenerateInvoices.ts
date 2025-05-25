@@ -34,7 +34,7 @@ export default class GenerateInvoices  {
             // Regime de caixa (cash)
             // Esse é o regime de caixa: só gera nota se o pagamento aconteceu naquele mês.
             if(input.type == 'cash') {
-                for (const payment of contract.payments) {
+                for (const payment of contract.getPayments()) {
                     // verficar se estou no mes de apuracao e o +1 pq janeiro = 0
                     // Se sim, gera uma nota fiscal com a data e o valor do pagamento.
                     if(payment.date.getMonth() + 1 !== input.month || payment.date.getFullYear() !== input.year) continue;
