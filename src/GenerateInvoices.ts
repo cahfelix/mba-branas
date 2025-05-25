@@ -27,6 +27,8 @@ export default class GenerateInvoices  {
     async execute(input: Input): Promise<Output[]> {
         const output: Output[] = [];
         const contracts = await this.contractRepository.list();  
+        console.log("Contratos carregados:", contracts);
+
         
         for (const contract of contracts) {
             // Regime de caixa (cash)
@@ -39,7 +41,7 @@ export default class GenerateInvoices  {
 
                     output.push({ 
                             date: moment(payment.date).format("YYYY-MM-DD"),
-                            amount: parseFloat(payment.amount)
+                            amount: payment.amount
                     })
                 }
             }
@@ -54,7 +56,7 @@ export default class GenerateInvoices  {
                     // pegar data inicial e somar meses
                     const date = moment(contract.date). add(period++, 'months').toDate();
                     if(date.getMonth() + 1 !== input.month || date.getFullYear() !== input.year) continue;
-                    const amount = parseFloat(contract.amount) / contract.periods;
+                    const amount = contract.amount / contract.periods;
                     output.push({ date: moment(date).format("YYYY-MM-DD"), amount })                    
                 }
             }
