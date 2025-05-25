@@ -6,6 +6,7 @@ import DatabaseConnection from "../src/DatabaseConnection";
 let generateInvoices: GenerateInvoices;
 let connection: DatabaseConnection; 
 
+// teste de integração
 // executar algo antes de cada teste rodar.
 beforeEach(() => {
     // ✅ Instanciando o adapter de conexão com banco
@@ -17,37 +18,6 @@ beforeEach(() => {
     // ✅ Injetando o repositório no serviço que gera notas fiscais
     generateInvoices = new GenerateInvoices(contractRepository); 
 });
-// beforeEach(() =>{
-//     // const contractRepository: ContractDatabaseRepository = {
-//     //     async list() : Promise<any> {
-//     //         // Simulando (mockando) uma versão do ContractDatabaseRepository
-//     //         return [
-//     //             {
-//     //                 iDContract: "",
-//     //                 description: "",
-//     //                 periods: 12,
-//     //                 amounth: "6000",
-//     //                 date: new Date("2022-01-01T10:00:00"),
-//     //                 payments: [
-//     //                     {
-//     //                         idPayment: "",
-//     //                         idContract: "",
-//     //                         amount: 6000,
-//     //                         date: new Date("2022-01-05T10:00:00")
-                            
-//     //                     }
-//     //                 ]
-//     //             }
-//     //         ]
-//     //     }
-//     // }
-//     // com mock
-//     // generateInvoices = new GenerateInvoices(contractRepository);
-//     // com bando de dados
-
-//     const contractRepository =  new ContractDatabaseRepository(connection)
-//     generateInvoices = new GenerateInvoices(contractRepository); 
-// });
 
 test("Deve gerar as notas fiscais por regime de caixa", async function(){
     const input = {

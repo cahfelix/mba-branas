@@ -1,5 +1,5 @@
-
 import moment from "moment";
+
 import ContractDatabaseRepository from "./ContractDatabaseRepository";
 import ContractRepository from "./ContractRepository";
 
@@ -26,40 +26,15 @@ export default class GenerateInvoices  {
 
     async execute(input: Input): Promise<Output[]> {
         const output: Output[] = [];
-        const contracts = await this.contractRepository.list();  
+        const contracts = await this.contractRepository.list();
         console.log("Contratos carregados:", contracts);
 
-        
         for (const contract of contracts) {
-            // Regime de caixa (cash)
-            // Esse é o regime de caixa: só gera nota se o pagamento aconteceu naquele mês.
-            if(input.type == 'cash') {
-                for (const payment of contract.getPayments()) {
-                    // verficar se estou no mes de apuracao e o +1 pq janeiro = 0
-                    // Se sim, gera uma nota fiscal com a data e o valor do pagamento.
-                    if(payment.date.getMonth() + 1 !== input.month || payment.date.getFullYear() !== input.year) continue;
-
-                    output.push({ 
-                            date: moment(payment.date).format("YYYY-MM-DD"),
-                            amount: payment.amount
-                    })
-                }
+            const invoices = contract.generateInvoices(input.month, input.year, input.type);
+            for (const invoice of invoices)  {
+                output.push({date: moment(invoice.date).format("YYYY-MM-DD"), amount: invoice.amount})
             }
-
-            // Regime de caixa (accrual)
-            // Esse é o regime de competência: gera a nota com base no que deveria ser cobrado naquele mês, não no pagamento real.
-            if(input.type == "accrual") {
-                let period = 0;
-
-                while (period < contract.periods) {
-                    console.log('1', period);
-                    // pegar data inicial e somar meses
-                    const date = moment(contract.date). add(period++, 'months').toDate();
-                    if(date.getMonth() + 1 !== input.month || date.getFullYear() !== input.year) continue;
-                    const amount = contract.amount / contract.periods;
-                    output.push({ date: moment(date).format("YYYY-MM-DD"), amount })                    
-                }
-            }
+           
         }
         return output;
     }
