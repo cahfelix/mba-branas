@@ -1,7 +1,40 @@
 import GenerateInvoices from "../src/GenerateInvoices";
+import ContractDatabaseRepository from "../src/ContractDatabaseRepository";
+
+let generateInvoices: GenerateInvoices;
+
+// executar algo antes de cada teste rodar.
+beforeEach(() =>{
+    const contractRepository: ContractDatabaseRepository = {
+        async list() : Promise<any> {
+            // Simulando (mockando) uma versão do ContractDatabaseRepository
+            return [
+                {
+                    iDContract: "",
+                    description: "",
+                    periods: 12,
+                    amounth: "6000",
+                    date: new Date("2022-01-01T10:00:00"),
+                    payments: [
+                        {
+                            idPayment: "",
+                            idContract: "",
+                            amount: 6000,
+                            date: new Date("2022-01-05T10:00:00")
+                            
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    // com mock
+    generateInvoices = new GenerateInvoices(contractRepository);
+    // com bando de dados
+    // generateInvoices = new GenerateInvoices(new ContractDatabaseRepository()); 
+});
 
 test("Deve gerar as notas fiscais por regime de caixa", async function(){
-    const generateInvoices = new GenerateInvoices();
     const input = {
         month: 1,
         year: 2022,
@@ -13,7 +46,6 @@ test("Deve gerar as notas fiscais por regime de caixa", async function(){
 });
 
 test("Deve gerar as notas fiscais por regime de competencia", async function(){
-    const generateInvoices = new GenerateInvoices();
     const input = {
         month: 1,
         year: 2022,
@@ -25,7 +57,6 @@ test("Deve gerar as notas fiscais por regime de competencia", async function(){
 });
 
 test("Deve gerar as notas fiscais por regime de competencia - mes 2", async function(){
-    const generateInvoices = new GenerateInvoices();
     const input = {
         month: 2,
         year: 2022,
@@ -36,28 +67,4 @@ test("Deve gerar as notas fiscais por regime de competencia - mes 2", async func
     expect(output.at(0)?.amount).toBe(500); // 6000/ 12 meses = 500 reais
 });
 
-
-
-
-
-
-
-
 // rodar npx jest
-
-// Eu gosto de atribuir um use case por classe, 
-// pois eu acho que isso melhora a rastreadibilidade desse use case. 
-// Eu acho que isso deixa tudo mais claro para você manipular, 
-// e eu padronizo também, para que todo use case receba um determinado input. 
-// Por enquanto deixa quieto esse input. Todo use case retorna um output. 
-
-
-// Vou fazer um await, porque provavelmente deve ter alguma operação relacionada com banco de dados, e vamos ver o que sai do outro lado. Por enquanto eu só vou mostrar para você o que sai, não vou nem me dar o trabalho de criar uma condição.
-
-
-
-
-// DTO - Data Transfer Object
-// Objeto que so tem propriedades, sendo utilizado para transporte entre camadas da apliacao (
-//Object, basicamente, é um objeto que só tem propriedades utilizadas para transporte entre camadas da aplicação. Essa é a ideia do DTO. Infelizmente, muita gente hoje, não exatamente infelizmente, pois cada um usa o que quer e é responsável por isso, usa linguagens orientadas a objetos, mas com um domínio muito anêmico. Ou seja, tem código procedural junto com DTOs, só objetos que só tem dados. Assim, o objeto se torna só uma estrutura de dado, não tem a ver com um design orientado a objetos. Eu vou até salvar isso aqui: patterns.txt
-

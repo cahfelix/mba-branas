@@ -1,3 +1,3 @@
-export default class ContractRepository {
-    // list (): Promise<any>; 
+export default interface ContractRepository {
+    list (): Promise<any>; 
 }

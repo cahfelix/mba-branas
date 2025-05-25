@@ -3,7 +3,7 @@ import ContractRepository from "./ContractRepository";
 
 const pgp = pgPromise();
 
-export default class ContractDatabaseRepository extends ContractRepository {
+export default class ContractDatabaseRepository implements ContractRepository {
     async list (): Promise<any> {
 
         const db = 'postgres://camila.felix:123456@localhost:5432/app';
