@@ -1,0 +1,4 @@
+DTO - Data Transfer Object
+Object, basicamente, é um objeto que só tem propriedades utilizadas para transporte entre camadas da aplicação. Essa é a ideia do DTO. 
+
+
