@@ -1,3 +1,7 @@
+Site Referencia para estudo
+https://refactoring.guru/design-patterns
+
+
 DTO - Data Transfer Object
 Objeto que só tem propriedades, sendo utilizado para transporte entre camadas da aplicação
 
@@ -10,5 +14,18 @@ Com o Repository. A lógica de negócio fica separada da lógica de acesso a dad
 Adapter 
 Converte uma interface de uma classe por outra esperada pelo cliente, permitindo que classes incompativeis trabalhem juntas
 outra permitindo que você reduza o acoplamento.
+
+OCP 
+Open Closed/ Principle 
+Fechado para modificacao e aberto para extensão
+Crie pontos de extensão, evitando mexer no que já eta funcionando e evitando fragilizar o codigo.
+Nao acumular codigo demais no mesmo lugar
+
+Strategy
+Criar comportamento intercambiavel
+https://refactoring.guru/design-patterns/strategy
+
+Dynamic Factory
+Cria ruma instancia com base em uma string
 
 

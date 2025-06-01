@@ -1,3 +1,4 @@
+import AccrualBasisStrategy from "./AccrualBasisStrategy";
 import Contract from "./Contract";
 import ContractRepository from "./ContractRepository";
 import DatabaseConnection from "./DatabaseConnection";
@@ -27,7 +28,7 @@ export default class ContractDatabaseRepository implements ContractRepository {
                 contractData.description, 
                 parseFloat(contractData.amount), 
                 contractData.periods, 
-                contractData.date
+                contractData.date,
             )
             const paymentsData = await this.connection.query(
                     "select * from branas.payment where id_contract = $1",

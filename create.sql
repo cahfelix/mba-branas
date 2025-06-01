@@ -4,7 +4,6 @@ create extension if not exists "uuid-ossp";
 -- comecar dropando o schema (cascade ja apaga tudo)
 drop schema if exists branas cascade;
 
-
 -- esse schema tera 3 tabelas mais 2 tabelas mais relevantes 
 create schema branas;
 
