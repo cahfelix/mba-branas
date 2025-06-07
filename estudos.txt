@@ -40,5 +40,15 @@ Permite acrescentar funcionalidades a um objeto existente (OCP = agregue pontos 
 
 Controller
 Conecte camadas diferentes, geralmente um driver, repassando os dados de entrada e retornando a saida de acordo com o drive
+Conecta o driver com a aplicacao!
+
+
+Composition Root
+EntryPoint da aplicacao, onde sao criadas as instancias utilizadas pelos componentes, monta grafo de dependencias da aplicacao
+
+
+Mediator
+Cria um mecanimos de notificacao para reduzir o acoplamento entre os objetos
+
 
 

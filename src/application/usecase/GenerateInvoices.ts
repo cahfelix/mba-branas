@@ -2,6 +2,7 @@ import ContractRepository from "../repository/ContractRepository";
 import JsonPresenter from "../../infra/presenter/JsonPresenter";
 import Presenter from "../presenter/Presenter";
 import UseCase from "./UseCase";
+import Mediator from "../../infra/mediator/Mediator";
 
 /**
  * Tipo de entrada esperada para a geração de notas fiscais.
@@ -43,7 +44,8 @@ export default class GenerateInvoices implements UseCase {
      */
     constructor(
         readonly contractRepository: ContractRepository,
-        readonly presenter: Presenter = new JsonPresenter()
+        readonly presenter: Presenter = new JsonPresenter(),
+        readonly mediator: Mediator = new Mediator()
     ) { }
 
     /**
@@ -65,6 +67,8 @@ export default class GenerateInvoices implements UseCase {
             }
 
         }
+
+        await this.mediator.publish("InvoicesGenerated", output);
 
         // Apresenta a saída formatada (JSON, CSV, etc.)
         return this.presenter.present(output);
