@@ -1,5 +1,5 @@
+import UseCase from "../../application/usecase/UseCase";
 import HttpServer from "./HttpServer";
-import UseCase from "./UseCase";
 
 /**
  * Controlador principal responsável por conectar rotas HTTP com casos de uso da aplicação.
@@ -9,8 +9,8 @@ export default class MainController {
     // Cria uma nova instância do controlador principal, httpServer vai permitir mapear uma rota especifica
     constructor(
         readonly httpServer: HttpServer,
-        readonly useCase: UseCase) 
-    {
+        readonly useCase: UseCase) {
+
         /**
          * Registra uma rota POST em `/generate_invoices` no servidor HTTP.
          * Extrai os dados do corpo da requisição (`body`) e adiciona informações do cabeçalho (`headers`)

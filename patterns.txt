@@ -1,0 +1,57 @@
+Site referência para estudo
+https://refactoring.guru/design-patterns
+
+DTO - Data Transfer Object
+Objeto simples que contém apenas propriedades e é usado para transportar dados entre camadas da aplicação, facilitando a comunicação sem expor lógica de negócio.
+
+Repository
+Responsável pela persistência de aggregates — conjuntos de objetos do domínio, como entidades e value objects.
+Separa a lógica de acesso a dados da lógica de negócio, o que torna o sistema:
+
+Mais fácil de testar
+
+Mais fácil de manter
+
+Flexível para trocar de banco de dados
+
+Mais organizado e compreensível
+
+Adapter
+Converte a interface de uma classe para outra esperada pelo cliente, permitindo que classes incompatíveis trabalhem juntas.
+Ajuda a reduzir o acoplamento entre componentes do sistema.
+
+OCP - Open/Closed Principle
+Aberto para extensão, fechado para modificação.
+Isso significa:
+
+Crie pontos de extensão no sistema para adicionar funcionalidades sem alterar o código que já funciona.
+
+Evite modificar código estável para não introduzir bugs.
+
+Não acumule muita lógica em um único lugar; mantenha o código organizado e modular.
+
+Strategy
+Permite criar comportamentos intercambiáveis e selecionáveis em tempo de execução.
+Exemplo: diferentes estratégias para cálculo, geração de documentos, etc.
+Mais detalhes: https://refactoring.guru/design-patterns/strategy
+
+Dynamic Factory
+Cria instâncias de classes com base em uma string ou parâmetro dinâmico, facilitando a escolha da implementação adequada em tempo de execução.
+
+Presenter
+Responsável por formatar e adaptar dados para o formato esperado pelos clientes (UI, API, etc).
+Foca na responsabilidade de apresentar dados, separando essa função da lógica de negócio.
+
+Decorator
+Permite acrescentar funcionalidades a um objeto existente sem alterar sua estrutura, respeitando o OCP.
+Você adiciona comportamentos extras “decorando” o objeto original.
+
+Mais detalhes: https://refactoring.guru/design-patterns/decorator
+
+Controller
+Conecta camadas diferentes do sistema, atuando como um driver que recebe dados de entrada, passa para a aplicação e retorna as respostas.
+Serve como ponto de integração entre o mundo externo (ex: HTTP) e a aplicação.
+
+Composition Root
+Ponto de entrada da aplicação onde as instâncias dos componentes são criadas e conectadas entre si.
+É aqui que se configura toda a “composição” do sistema, injetando dependências e preparando o ambiente para rodar.

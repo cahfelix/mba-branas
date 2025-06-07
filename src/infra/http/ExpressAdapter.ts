@@ -26,5 +26,4 @@ export default class ExpressAdapter implements HttpServer {
             console.log(`🚀 Servidor rodando na porta ${port}`);
         });
     }
-
 }

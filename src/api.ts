@@ -1,11 +1,11 @@
 import express from "express";
-import PgPromiseAdapter from "./PgPromiseAdapter";
-import GenerateInvoices from "./GenerateInvoices";
-import ContractDatabaseRepository from "./ContractDatabaseRepository";
-import LoggerDecorator from "./LoggerDecorator";
+import GenerateInvoices from "./application/usecase/GenerateInvoices";
+import ContractDatabaseRepository from "./infra/repository/ContractDatabaseRepository";
+import LoggerDecorator from "./application/decorator/LoggerDecorator";
+import PgPromiseAdapter from "./infra/database/PgPromiseAdapter";
 
 // ✅ Instanciando o app
-const app = express(); 
+const app = express();
 
 // ✅ Converte o body, permite que o Express entenda JSON no corpo da requisição
 app.use(express.json());
@@ -17,8 +17,7 @@ const connection = new PgPromiseAdapter();
 const contractRepository = new ContractDatabaseRepository(connection);
 
 // ✅ Cria a instância do serviço que gera notas fiscais
-const generateInvoices = new LoggerDecorator( new GenerateInvoices(contractRepository));
-
+const generateInvoices = new LoggerDecorator(new GenerateInvoices(contractRepository));
 
 // ✅ Define rota POST para gerar notas fiscais
 app.post("/generate_invoices", async (req: any, res: any) => {
@@ -32,5 +31,6 @@ app.listen(3001, () => {
     console.log("🚀 Servidor rodando na porta 3001");
 });
 
-// npx nodemon src/api.ts
-// curl localhost:3001
+// Dicas para rodar:
+// - Execute com nodemon para hot reload: npx nodemon src/api.ts
+// - Teste com curl: curl localhost:3001
