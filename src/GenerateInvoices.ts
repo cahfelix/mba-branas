@@ -2,6 +2,8 @@ import moment from "moment";
 
 import ContractDatabaseRepository from "./ContractDatabaseRepository";
 import ContractRepository from "./ContractRepository";
+import Presenter from "./Presenter";
+import JsonPresenter from "./JsonPresenter";
 
 type Input = {
     month: number,
@@ -9,19 +11,21 @@ type Input = {
     type: string
 }
 
-type Output = {
-    date: string,
+export type Output = {
+    date: Date,
     amount: number
 }
 
 // Classe responsável por gerar notas fiscais a partir de contratos, 
 // com base no regime escolhido: caixa (cash) ou competência (accrual). 
-export default class GenerateInvoices  {
+export default class GenerateInvoices {
 
     // Aqui temos injeção de dependência: a classe recebe de fora um repositório (contractRepository) 
     // que implementa a interface ContractRepository.
     // O readonly significa que esse valor não pode ser alterado depois de ser atribuído no construtor.
-    constructor (readonly contractRepository: ContractRepository) {
+    constructor(
+        readonly contractRepository: ContractRepository, 
+        readonly presenter: Presenter = new JsonPresenter()) {
     }
 
     async execute(input: Input): Promise<Output[]> {
@@ -31,12 +35,13 @@ export default class GenerateInvoices  {
 
         for (const contract of contracts) {
             const invoices = contract.generateInvoices(input.month, input.year, input.type);
-            for (const invoice of invoices)  {
-                output.push({date: moment(invoice.date).format("YYYY-MM-DD"), amount: invoice.amount})
+            for (const invoice of invoices) {
+                output.push({ date: invoice.date, amount: invoice.amount })
             }
-           
+
         }
-        return output;
+        // return output;
+        return this.presenter.present(output);
     }
 }
 
