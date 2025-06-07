@@ -29,3 +29,14 @@ Dynamic Factory
 Cria ruma instancia com base em uma string
 
 
+Presenter
+Formatar e adequar um determinado conteudo, um determinado connjunto de dados, a necessidade dos clientes
+Padroes tem haver com responsabilidade
+
+
+Decorator
+https://refactoring.guru/design-patterns/decorator
+Permite acrescentar funcionalidades a um objeto existente (OCP = agregue pontos de extencao  sem mexes no q ja existe)
+
+
+

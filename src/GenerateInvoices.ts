@@ -4,6 +4,7 @@ import ContractDatabaseRepository from "./ContractDatabaseRepository";
 import ContractRepository from "./ContractRepository";
 import Presenter from "./Presenter";
 import JsonPresenter from "./JsonPresenter";
+import UseCase from "./UseCase";
 
 type Input = {
     month: number,
@@ -18,7 +19,7 @@ export type Output = {
 
 // Classe responsável por gerar notas fiscais a partir de contratos, 
 // com base no regime escolhido: caixa (cash) ou competência (accrual). 
-export default class GenerateInvoices {
+export default class GenerateInvoices implements UseCase {
 
     // Aqui temos injeção de dependência: a classe recebe de fora um repositório (contractRepository) 
     // que implementa a interface ContractRepository.

@@ -2,6 +2,7 @@ import express from "express";
 import PgPromiseAdapter from "./PgPromiseAdapter";
 import GenerateInvoices from "./GenerateInvoices";
 import ContractDatabaseRepository from "./ContractDatabaseRepository";
+import LoggerDecorator from "./LoggerDecorator";
 
 // ✅ Instanciando o app
 const app = express(); 
@@ -16,11 +17,13 @@ const connection = new PgPromiseAdapter();
 const contractRepository = new ContractDatabaseRepository(connection);
 
 // ✅ Cria a instância do serviço que gera notas fiscais
-const generateInvoices = new GenerateInvoices(contractRepository);
+const generateInvoices = new LoggerDecorator( new GenerateInvoices(contractRepository));
 
 // ✅ Define rota POST para gerar notas fiscais
 app.post("/generate_invoices", async (req: any, res: any) => {
     const input = req.body;
+    input.userAgent = req.headers["user-agent"];
+    input.host = req.headers.host;
     const output = await generateInvoices.execute(input);
     res.json(output);
 })
