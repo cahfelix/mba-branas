@@ -38,5 +38,7 @@ Decorator
 https://refactoring.guru/design-patterns/decorator
 Permite acrescentar funcionalidades a um objeto existente (OCP = agregue pontos de extencao  sem mexes no q ja existe)
 
+Controller
+Conecte camadas diferentes, geralmente um driver, repassando os dados de entrada e retornando a saida de acordo com o drive
 
 

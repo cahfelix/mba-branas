@@ -19,11 +19,10 @@ const contractRepository = new ContractDatabaseRepository(connection);
 // ✅ Cria a instância do serviço que gera notas fiscais
 const generateInvoices = new LoggerDecorator( new GenerateInvoices(contractRepository));
 
+
 // ✅ Define rota POST para gerar notas fiscais
 app.post("/generate_invoices", async (req: any, res: any) => {
     const input = req.body;
-    input.userAgent = req.headers["user-agent"];
-    input.host = req.headers.host;
     const output = await generateInvoices.execute(input);
     res.json(output);
 })
@@ -32,8 +31,6 @@ app.post("/generate_invoices", async (req: any, res: any) => {
 app.listen(3001, () => {
     console.log("🚀 Servidor rodando na porta 3001");
 });
-
-
 
 // npx nodemon src/api.ts
 // curl localhost:3001
